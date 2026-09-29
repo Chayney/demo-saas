@@ -1,0 +1,243 @@
+.header {
+    margin-bottom: 24px;
+}
+
+.headerTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.title {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
+}
+
+.description {
+    margin-top: 4px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #6b7280;
+}
+
+/* Logout */
+
+.logoutButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    height: 38px;
+    padding: 0 16px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #374151;
+
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+
+    cursor: pointer;
+
+    box-shadow: 0 1px 2px rgb(0 0 0 / 4%);
+
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.15s ease;
+}
+
+.logoutButton:hover {
+    border-color: #d1d5db;
+    background: #f9fafb;
+    color: #111827;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 7%);
+    transform: translateY(-1px);
+}
+
+.logoutButton:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.logoutButton:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: 2px;
+}
+
+/* Todo Grid */
+
+.todoGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 768px) {
+    .todoGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .todoGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Card */
+
+.todoCard {
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+    padding: 20px;
+    box-shadow:
+        0 1px 2px rgb(0 0 0 / 4%),
+        0 2px 8px rgb(0 0 0 / 3%);
+}
+
+/* Card header */
+
+.todoCardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.todoCardHeading {
+    margin: 0;
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 600;
+    color: #9ca3af;
+    letter-spacing: 0.02em;
+}
+
+/* Action buttons */
+
+.todoActions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.detailButton,
+.editButton,
+.deleteButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    background: transparent;
+    color: #6b7280;
+
+    text-decoration: none;
+    cursor: pointer;
+
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        transform 0.15s ease;
+}
+
+/* 詳細 */
+
+.detailButton:hover {
+    border-color: #e5e7eb;
+    background: #f9fafb;
+    color: #374151;
+    transform: translateY(-1px);
+}
+
+/* 編集 */
+
+.editButton:hover {
+    border-color: #dbeafe;
+    background: #eff6ff;
+    color: #2563eb;
+    transform: translateY(-1px);
+}
+
+/* 削除 */
+
+.deleteButton:hover {
+    border-color: #fecaca;
+    background: #fef2f2;
+    color: #dc2626;
+    transform: translateY(-1px);
+}
+
+.detailButton:active,
+.editButton:active,
+.deleteButton:active {
+    transform: translateY(0) scale(0.95);
+}
+
+.detailButton:focus-visible,
+.editButton:focus-visible,
+.deleteButton:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: 2px;
+}
+
+/* Todo fields */
+
+.todoField {
+    margin-bottom: 18px;
+}
+
+.todoField:last-child {
+    margin-bottom: 0;
+}
+
+.todoLabel {
+    display: block;
+    margin-bottom: 6px;
+
+    font-size: 11px;
+    line-height: 16px;
+    font-weight: 700;
+    color: #9ca3af;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.todoTitle {
+    margin: 0;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #111827;
+
+    overflow-wrap: anywhere;
+}
+
+.todoContent {
+    margin: 0;
+    font-size: 14px;
+    line-height: 22px;
+    color: #4b5563;
+
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
