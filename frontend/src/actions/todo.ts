@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { auth } from "@/config/auth";
 import { prisma } from "@/external/lib/prisma"
@@ -50,6 +50,8 @@ export const createTodo = async (formData: FormData) => {
 };
 
 export const updateTodo = async (id: number, formData: FormData) => {
+    // <form action={handleSubmit}> の仕組みによってFormDataが自動的に生成
+    // FormDataのインスタンス作成不要
     const session = await auth();
 
     const userId = Number(session?.user.id);

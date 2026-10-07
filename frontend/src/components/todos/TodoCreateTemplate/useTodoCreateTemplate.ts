@@ -1,25 +1,26 @@
-"use client";
-
+import { createTodo } from "@/actions/todo";
 import { useState } from "react";
-import { updateTodo } from "@/actions/todo";
-import { Todo } from "@/types/todo";
 
-export const useTodoEdit = (todo: Todo) => {
+export const useTodoCreateTemplate = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = async (formData: FormData) => {
+    async function handleCreateTodo(formData: FormData) {
+        if (isSubmitting) {
+            return;
+        }
+
         try {
             setIsSubmitting(true);
-            await updateTodo(todo.id, formData);
+
+            await createTodo(formData);
         } catch (error) {
             console.error(error);
             setIsSubmitting(false);
         }
-    };
+    }
 
     return {
-        todo,
         isSubmitting,
-        handleSubmit,
+        handleCreateTodo,
     };
 };

@@ -5,6 +5,8 @@ import { hash } from "bcryptjs";
 import { signIn, signOut } from "@/config/auth";
 import { redirect } from "next/navigation";
 
+// FormDataはブラウザ標準型
+// name属性を取得
 export const registerUser = async (formData: FormData) => {
     const name = formData.get("name")?.toString();
     const email = formData.get("email")?.toString();

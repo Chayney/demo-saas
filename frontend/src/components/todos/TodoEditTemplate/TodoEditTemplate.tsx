@@ -3,25 +3,19 @@
 import Link from "next/link";
 import styles from "./style.module.css";
 import { useTodoEdit } from "./useTodoEditTemplate";
+import { Todo } from "@/types/todo";
 
 type Props = {
-    id: string;
+    todo: Todo;
 };
 
 export const TodoEditTemplate = (props: Props) => {
-    const { id } = props;
-    const todoId = Number(id);
+    const { todo } = props;
 
     const {
-        todo,
-        isLoading,
         isSubmitting,
         handleSubmit,
-    } = useTodoEdit(todoId);
-
-    if (isLoading) {
-        return <div>読み込み中...</div>;
-    }
+    } = useTodoEdit(todo);
 
     if (!todo) {
         return (
@@ -99,7 +93,7 @@ export const TodoEditTemplate = (props: Props) => {
 
                     <div className={styles.actions}>
                         <Link
-                            href={`/todos/${todo.id}`}
+                            href="/todos"
                             className={styles.cancelButton}
                         >
                             キャンセル

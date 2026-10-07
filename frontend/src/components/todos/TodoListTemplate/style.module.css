@@ -83,6 +83,38 @@
     gap: 16px;
 }
 
+.searchForm {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.searchInput {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.searchButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: #2563eb;
+    color: #fff;
+    cursor: pointer;
+}
+
+.searchButton:hover {
+    background-color: #1d4ed8;
+}
+
 @media (min-width: 768px) {
     .todoGrid {
         grid-template-columns: repeat(2, 1fr);

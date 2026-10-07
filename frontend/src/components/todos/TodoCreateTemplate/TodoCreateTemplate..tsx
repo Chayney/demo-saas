@@ -1,22 +1,22 @@
 "use client";
 
 import styles from "./style.module.css";
-import { useTodo } from "@/hooks/useTodo";
+import { useTodoCreateTemplate } from "./useTodoCreateTemplate";
 
 export const TodoCreateTemplate = () => {
     const {
-        title,
-        setTitle,
         isSubmitting,
         handleCreateTodo,
-    } = useTodo();
+    } = useTodoCreateTemplate();
 
     async function handleSubmit(
         e: React.SyntheticEvent<HTMLFormElement>
     ) {
         e.preventDefault();
 
-        await handleCreateTodo();
+        const formData = new FormData(e.currentTarget);
+
+        await handleCreateTodo(formData);
     }
 
     return (
@@ -28,16 +28,24 @@ export const TodoCreateTemplate = () => {
                 <input
                     className={styles.input}
                     type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Todoを入力してください"
+                    name="title"
+                    placeholder="タイトルを入力してください"
                     disabled={isSubmitting}
+                    required
+                />
+
+                <textarea
+                    className={styles.textarea}
+                    name="content"
+                    placeholder="内容を入力してください"
+                    disabled={isSubmitting}
+                    rows={5}
                 />
 
                 <button
                     className={styles.button}
                     type="submit"
-                    disabled={isSubmitting || !title.trim()}
+                    disabled={isSubmitting}
                 >
                     {isSubmitting ? "追加中..." : "追加"}
                 </button>

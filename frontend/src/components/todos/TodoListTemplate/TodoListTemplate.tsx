@@ -4,13 +4,21 @@ import Link from "next/link";
 import { logoutUser } from "@/actions/auth";
 import styles from "./style.module.css";
 import { useTodoList } from "./useTodoListTemplate";
+import { Todo } from "@/types/todo";
 
-export const TodoListTemplate = () => {
-    const { todos, isLoading } = useTodoList();
+type Props = {
+    todos: Todo[];
+};
 
-    if (isLoading) {
-        return <div>読み込み中...</div>;
-    }
+export const TodoListTemplate = (props: Props) => {
+    const { todos } = props;
+
+    const {
+        searchText,
+        setSearchText,
+        filteredTodos,
+        handleSearch,
+    } = useTodoList(todos);
 
     return (
         <div>
@@ -33,10 +41,33 @@ export const TodoListTemplate = () => {
                         </button>
                     </form>
                 </div>
+
+                <form
+                    className={styles.searchForm}
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        handleSearch();
+                    }}
+                >
+                    <input
+                        type="text"
+                        value={searchText}
+                        onChange={(e) => setSearchText(e.target.value)}
+                        placeholder="Todoのタイトルを検索"
+                        className={styles.searchInput}
+                    />
+
+                    <button
+                        type="submit"
+                        className={styles.searchButton}
+                    >
+                        検索
+                    </button>
+                </form>
             </div>
 
             <div className={styles.todoGrid}>
-                {todos.map((todo) => (
+                {filteredTodos.map((todo) => (
                     <div
                         key={todo.id}
                         className={styles.todoCard}

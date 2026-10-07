@@ -1,30 +1,31 @@
-// 必ずしも明示する必要はない
 "use client";
 
-import { useEffect, useState } from "react";
-import { getTodos } from "@/actions/todo";
+import { useState } from "react";
 import { Todo } from "@/types/todo";
 
-export const useTodoList = () => {
-    const [todos, setTodos] = useState<Todo[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+export const useTodoList = (todos: Todo[]) => {
+    const [searchText, setSearchText] = useState("");
+    const [filteredTodos, setFilteredTodos] = useState(todos);
 
-    // Server Actionから取得したTodoをClient側のstateに入れるため
-    useEffect(() => {
-        const fetchTodos = async () => {
-            try {
-                const todos = await getTodos();
-                setTodos(todos);
-            } finally {
-                setIsLoading(false);
-            }
-        };
+    const handleSearch = () => {
+        const keyword = searchText.trim().toLowerCase();
 
-        fetchTodos();
-    }, []);
+        if (!keyword) {
+            setFilteredTodos(todos);
+            return;
+        }
+
+        setFilteredTodos(
+            todos.filter((todo) =>
+                todo.title.toLowerCase().includes(keyword)
+            )
+        );
+    };
 
     return {
-        todos,
-        isLoading,
+        searchText,
+        setSearchText,
+        filteredTodos,
+        handleSearch,
     };
 };
