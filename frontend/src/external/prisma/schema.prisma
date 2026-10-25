@@ -7,23 +7,65 @@ generator client {
   output   = "../generated/prisma-client"
 }
 
-model User {
+model Company {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   name      String
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  todos     Todo[]
+
+  users     User[]
+  customers Customer[]
+  projects  Project[]
 }
 
-model Todo {
+model User {
   id        Int      @id @default(autoincrement())
-  title     String
-  content   String
+  email     String   @unique
+  name      String
+  password  String
+  role      Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  @@index([userId])
+
+  companyId Int
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+}
+
+model Customer {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  phone     String
+  address   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  companyId Int
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  projects  Project[]
+
+  // companyId + id の組み合わせを一意にする
+  @@unique([companyId, id])
+  @@index([companyId])
+}
+
+model Project {
+  id         Int      @id @default(autoincrement())
+  name       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  companyId  Int
+  customerId Int
+
+  company  Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  customer Customer @relation(fields: [companyId, customerId], references: [companyId, id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([companyId, customerId])
 }

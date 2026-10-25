@@ -2,8 +2,8 @@ import { AuthenticatedLayoutWrapper } from "@/components/layout/AuthenticatedWra
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Todo App",
-    description: "Todo application",
+    title: "SaaS App",
+    description: "SaaS application",
 };
 
 export default function AuthenticatedLayout({children}: {children: React.ReactNode}) {

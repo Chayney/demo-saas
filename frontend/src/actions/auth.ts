@@ -5,16 +5,22 @@ import { hash } from "bcryptjs";
 import { signIn, signOut } from "@/config/auth";
 import { redirect } from "next/navigation";
 
-// FormDataはブラウザ標準型
-// name属性を取得
+// サーバー側で所属先の会社IDを取得・検証する処理を実装してください。
+// フォームから渡された companyId をそのまま信用しないこと。
+const getAuthorizedCompanyId = async (): Promise<number> => {
+    throw new Error("所属先の会社IDを取得する処理を実装してください");
+};
+
 export const registerUser = async (formData: FormData) => {
-    const name = formData.get("name")?.toString();
-    const email = formData.get("email")?.toString();
+    const name = formData.get("name")?.toString().trim();
+    const email = formData.get("email")?.toString().trim();
     const passwordOrg = formData.get("password")?.toString();
 
     if (!name || !email || !passwordOrg) {
         throw new Error("入力が不足しています");
     }
+
+    const companyId = await getAuthorizedCompanyId();
 
     const existingUser = await prisma.user.findUnique({
         where: {
@@ -33,6 +39,12 @@ export const registerUser = async (formData: FormData) => {
             name,
             email,
             password,
+            role: 0,
+            company: {
+                connect: {
+                    id: companyId,
+                },
+            },
         },
     });
 
@@ -40,7 +52,7 @@ export const registerUser = async (formData: FormData) => {
 };
 
 export const loginUser = async (formData: FormData) => {
-    const email = formData.get("email")?.toString();
+    const email = formData.get("email")?.toString().trim();
     const password = formData.get("password")?.toString();
 
     if (!email || !password) {
@@ -50,7 +62,7 @@ export const loginUser = async (formData: FormData) => {
     await signIn("credentials", {
         email,
         password,
-        redirectTo: "/todos",
+        redirectTo: "/dashboard",
     });
 };
 

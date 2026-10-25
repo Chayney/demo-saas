@@ -2,8 +2,8 @@ import { GuestLayoutWrapper } from "@/components/layout/GuestLayoutWrapper/Guest
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Todo App",
-    description: "Todo application",
+    title: "demosaas",
+    description: "saas application",
 };
 
 export default function GuestLayout({ children }: { children: React.ReactNode }) {

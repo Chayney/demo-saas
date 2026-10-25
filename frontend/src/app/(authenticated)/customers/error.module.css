@@ -1,0 +1,54 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 64px 24px;
+}
+
+.card {
+    padding: 40px 24px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: #fee2e2;
+    color: #b91c1c;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.title {
+    margin: 0;
+    color: #111827;
+    font-size: 22px;
+}
+
+.description {
+    margin: 12px 0 24px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.retryButton {
+    min-height: 42px;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.retryButton:hover {
+    background: #1d4ed8;
+}

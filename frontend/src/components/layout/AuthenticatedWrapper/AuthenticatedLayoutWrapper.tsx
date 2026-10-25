@@ -1,27 +1,38 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { Breadcrumb } from "../Breadcrumb";
 import styles from "./style.module.css";
 
-export const AuthenticatedLayoutWrapper = ({children}: {children: ReactNode}) => {
+export const AuthenticatedLayoutWrapper = ({
+    children,
+}: {
+    children: ReactNode;
+}) => {
     return (
         <div className={styles.container}>
             <aside className={styles.sidebar}>
-                <div className={styles.logo}>Todo App</div>
+                <div className={styles.logo}>
+                    顧客管理システム
+                </div>
 
                 <nav className={styles.nav}>
-                    <Link href="/todos" className={styles.navLink}>
-                        Todo一覧
+                    <Link href="/dashboard" className={styles.navLink}>
+                        ダッシュボード
                     </Link>
 
-                    <Link href="/todos/create" className={styles.navLink}>
-                        Todoを作成
+                    <Link href="/customers" className={styles.navLink}>
+                        顧客一覧
+                    </Link>
+
+                    <Link href="/projects" className={styles.navLink}>
+                        案件一覧
                     </Link>
                 </nav>
             </aside>
 
             <div className={styles.mainArea}>
                 <header className={styles.header}>
-                    <h1 className={styles.headerTitle}>Todo App</h1>
+                    <Breadcrumb />
                 </header>
 
                 <main className={styles.content}>
@@ -30,4 +41,4 @@ export const AuthenticatedLayoutWrapper = ({children}: {children: ReactNode}) =>
             </div>
         </div>
     );
-}
+};

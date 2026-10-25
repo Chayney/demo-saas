@@ -1,0 +1,72 @@
+.container {
+    display: flex;
+    min-height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: #f8fafc;
+}
+
+.card {
+    display: flex;
+    width: 100%;
+    max-width: 440px;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 40px 32px;
+    border: 1px solid #fee2e2;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08);
+    text-align: center;
+}
+
+.icon {
+    display: flex;
+    width: 52px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fee2e2;
+    color: #dc2626;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.title {
+    margin: 0;
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.description {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.retryButton {
+    min-height: 44px;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.retryButton:hover {
+    background: #1d4ed8;
+}
+
+.retryButton:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}

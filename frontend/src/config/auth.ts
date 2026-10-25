@@ -4,6 +4,10 @@ import { compare } from "bcryptjs";
 import { prisma } from "@/external/lib/prisma";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+    session: {
+        strategy: "jwt",
+    },
+
     providers: [
         Credentials({
             credentials: {
@@ -19,9 +23,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     return null;
                 }
 
+                const email = String(credentials.email);
+                const password = String(credentials.password);
+
                 const user = await prisma.user.findUnique({
                     where: {
-                        email: String(credentials.email),
+                        email,
                     },
                 });
 
@@ -30,7 +37,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 }
 
                 const isValid = await compare(
-                    String(credentials.password),
+                    password,
                     user.password
                 );
 
@@ -42,6 +49,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     id: String(user.id),
                     name: user.name,
                     email: user.email,
+                    companyId: user.companyId,
+                    role: user.role,
                 };
             },
         }),
@@ -51,6 +60,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         async jwt({ token, user }) {
             if (user) {
                 token.userId = user.id;
+
+                // authorize() が返した追加情報を保存
+                token.companyId = user.companyId;
+                token.role = user.role;
             }
 
             return token;
@@ -59,6 +72,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         async session({ session, token }) {
             if (session.user) {
                 session.user.id = token.userId as string;
+                session.user.companyId =
+                    token.companyId as number;
+                session.user.role = token.role as number;
             }
 
             return session;
